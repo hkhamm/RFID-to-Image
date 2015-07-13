@@ -4,4 +4,4 @@ This project allows a radio frequency identification (RFID) module connected to 
 
 To add new images you must place them in the images folder, add entries associating RFID tag numbers to characters to the Arduino code, and modify image_list.txt to associate the characters with an image name.
 
-This project was created by Keith Hamm for the [University of Oregon Museum of Natural and Cultural History](natural-history.uoregon.edu). As of this writing it is currently used by guests in the museum's natural history exhibit hall.
+This project was created by Keith Hamm for the [University of Oregon Museum of Natural and Cultural History](http://natural-history.uoregon.edu). As of this writing it is currently used by guests in the museum's natural history exhibit hall.
