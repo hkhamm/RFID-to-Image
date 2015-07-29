@@ -9,8 +9,9 @@ class ImagePanel(wx.Panel):
     	self.frame = parent
     	self.image = image
         self.Bind(wx.EVT_CHAR, self.on_keypress)
-    	self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
-    	self.Bind(wx.EVT_ERASE_BACKGROUND, self.draw_image)
+        # This line must be uncommented on versions of wxPython prior to 2.9
+    	# self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
+        self.Bind(wx.EVT_ERASE_BACKGROUND, self.draw_image)
 
     def draw_image(self, event):
     	"""
@@ -41,15 +42,15 @@ class MainFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent)
         self.ShowFullScreen(True, style=wx.FULLSCREEN_ALL)
-        self.Show()
 
-    	# Listen for Arduino
-    	# serial.Serial('/dev/ttyACM0', baudrate=9600)
+        # Listen for Arduino
+        # Uncomment when actually listening for Arduino
+        # serial.Serial('/dev/ttyACM0', baudrate=9600)
 
         self.image = wx.Bitmap('./images/rfid_main.jpg')
         self.panel = ImagePanel(self, self.image)
 
-	    # Setup image map
+        # Setup image map
         filename = 'image_list.txt'
         lines = (line.rstrip('\n') for line in open(filename))
         self.image_map = {}
@@ -60,8 +61,6 @@ class MainFrame(wx.Frame):
         self.timeout = 600000  # 10 min
         self.timeout_timer = wx.Timer(self, wx.ID_ANY)
         self.start_timeout_timer()
-
-        self.panel.GetEventHandler().ProcessEvent(wx.EraseEvent())
 
     def start_timeout_timer(self):
         """
@@ -101,7 +100,7 @@ class MainFrame(wx.Frame):
         """
         self.Destroy()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = wx.App(False)
-    MainFrame(None)
+    MainFrame(None).Show()
     app.MainLoop()
