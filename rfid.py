@@ -8,7 +8,6 @@ class ImagePanel(wx.Panel):
     	wx.Panel.__init__(self, parent)
     	self.frame = parent
     	self.image = image
-
         self.Bind(wx.EVT_CHAR, self.on_keypress)
     	self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
     	self.Bind(wx.EVT_ERASE_BACKGROUND, self.draw_image)
@@ -19,16 +18,12 @@ class ImagePanel(wx.Panel):
     	"""
     	dc = event.GetDC()
     	if not dc:
-            dc = wx.ClientDC(self)
-            rect = self.GetUpdateRegion().GetBox()
+    	    dc = wx.ClientDC(self)
+    	    rect = self.GetUpdateRegion().GetBox()
             dc.SetClippingRect(rect)
         dc.Clear()
-        # frame_size = self.frame.GetSizeTuple()
-        # height = (frame_size[0] / 2) - self.image.GetHeight()
-        # width = (frame_size[1] / 2)
         dc.DrawBitmap(self.image, 0, 0)
     	self.SetFocus()
-        print("image drawn?")
 
     def on_keypress(self, event):
     	"""
@@ -48,25 +43,25 @@ class MainFrame(wx.Frame):
         self.ShowFullScreen(True, style=wx.FULLSCREEN_ALL)
         self.Show()
 
+    	# Listen for Arduino
+    	# serial.Serial('/dev/ttyACM0', baudrate=9600)
+
         self.image = wx.Bitmap('./images/rfid_main.jpg')
         self.panel = ImagePanel(self, self.image)
 
-	       # Setup image map
+	    # Setup image map
         filename = 'image_list.txt'
         lines = (line.rstrip('\n') for line in open(filename))
         self.image_map = {}
         for line in lines:
             self.image_map[line[0]] = line[2:]
 
-    	# Listen for Arduino
-    	serial.Serial('/dev/tty.usbmodemfa131', baudrate=9600)
-
         # Timer to switch back to start image
         self.timeout = 600000  # 10 min
         self.timeout_timer = wx.Timer(self, wx.ID_ANY)
         self.start_timeout_timer()
 
-        # serial.Serial('/dev/tty.usbmodemfa131', baudrate=9600)
+        self.panel.GetEventHandler().ProcessEvent(wx.EraseEvent())
 
     def start_timeout_timer(self):
         """
@@ -86,9 +81,9 @@ class MainFrame(wx.Frame):
     	"""
     	Switches the image.
     	"""
-        self.image = wx.Bitmap('./images/' + self.image_map[char])
-        self.panel.image = self.image
-        self.panel.GetEventHandler().ProcessEvent(wx.EraseEvent())
+    	self.image = wx.Bitmap('./images/' + self.image_map[char])
+    	self.panel.image = self.image
+    	self.panel.GetEventHandler().ProcessEvent(wx.EraseEvent())
         self.restart_timeout_timer()
 
     def switch_on_timeout(self, event):
@@ -96,8 +91,8 @@ class MainFrame(wx.Frame):
         Switches the current image frame to the base image.
         """
         self.image = wx.Bitmap('./images/rfid_main.jpg')
-        self.panel.image = self.image
-        self.panel.GetEventHandler().ProcessEvent(wx.EraseEvent())
+    	self.panel.image = self.image
+    	self.panel.GetEventHandler().ProcessEvent(wx.EraseEvent())
         self.restart_timeout_timer()
 
     def close(self):
@@ -106,7 +101,7 @@ class MainFrame(wx.Frame):
         """
         self.Destroy()
 
-
-app = wx.App(False)
-MainFrame(None)
-app.MainLoop()
+if __name__ == "__main__":
+    app = wx.App(False)
+    MainFrame(None)
+    app.MainLoop()

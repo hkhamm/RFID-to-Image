@@ -47,6 +47,8 @@ String tag;
 
 
 void setup() {
+  delay(30000);
+  
   Serial.begin(9600);
   while (!Serial) {
     ; // Wait for serial port to connect. Needed for Leonardo only.
@@ -69,6 +71,7 @@ void setup() {
   }
 
   Serial.println("SM130 found");
+  
   halt();
 }
 
@@ -78,7 +81,7 @@ void loop() {
   delay(10);
   parse();
   set_flag();
-//  print_serial();
+  // print_serial();
   send_key();
   delay(100);
 }
@@ -136,24 +139,7 @@ void set_flag() {
 }
 
 
-//void print_serial() {
-//  if (flag == 1) {
-//    String one = String(id[8], HEX);
-//    String two = String(id[7], HEX);
-//    String three = String(id[6], HEX);
-//    String four = String(id[5], HEX);
-//    tag = String(one + two + three + four);
-//    
-//    Serial.println(tag);
-//    delay(100);
-//  }
-//}
-
-
-void send_key() {
-  String tag01 = "d11110aa";
-  String tag02 = "d115fb3a";
-  String tag03 = "d1174daa";
+void print_serial() {
   if (flag == 1) {
     String one = String(id[8], HEX);
     String two = String(id[7], HEX);
@@ -161,13 +147,119 @@ void send_key() {
     String four = String(id[5], HEX);
     tag = String(one + two + three + four);
     
-    if (tag == tag01) { 
+    Serial.println(tag);
+    delay(100);
+  }
+}
+
+
+void send_key() {
+  String taga = "d11110aa";
+  String tagb = "d115fb3a";
+  String tagc = "d1136ffa";
+  String tagd = "d11a754a";
+  String tage = "d1a96fa";
+  String tagf = "d11df5a";
+  String tagg = "d114d11a";
+  String tagh = "d11d27a";
+  String tagi = "d1174daa";
+  String tagj = "d118fdea";
+  String tagk = "d1ce8a";
+  String tagl = "d1bbdaa";
+  String tagm = "d1e494a";
+  String tagn = "d11946a";
+  String tago = "d11bfa2a";
+  String tagp = "d11976a";
+  String tagq = "d1d2d4a";
+  String tagr = "d1169eaa";
+  String tags = "d11bec7a";
+  String tagt = "d1abcaa";
+  String tagu = "d1b7daa";
+  String tagv = "d1bebfa";
+  String tagw = "d11422aa";
+  String tagx = "d11bb65a";
+  String tagy = "d11bf42a";
+  String tagz = "d11753aa";
+  String tag1 = "d11bb85a";
+  String tag2 = "d118d3aa";
+  String tag3 = "d119d6a";
+  String tag4 = "d11cd32a";
+  String tag5 = "d1af0aa";
+  String tag6 = "d11bf22a";
+  
+  if (flag == 1) {
+    String one = String(id[8], HEX);
+    String two = String(id[7], HEX);
+    String three = String(id[6], HEX);
+    String four = String(id[5], HEX);
+    tag = String(one + two + three + four);
+    
+    if (tag == taga) { 
       Keyboard.write('a');
-    } else if (tag == tag02) {
+    } else if (tag == tagb) {
       Keyboard.write('b');
-    } else if (tag == tag03) {
+    } else if (tag == tagc) {
       Keyboard.write('c');
+    } else if (tag == tagd) {
+      Keyboard.write('d');
+    } else if (tag == tage) {
+      Keyboard.write('e');
+    } else if (tag == tagf) {
+      Keyboard.write('f');
+    } else if (tag == tagg) {
+      Keyboard.write('g');
+    } else if (tag == tagh) {
+      Keyboard.write('h');
+    } else if (tag == tagi) {
+      Keyboard.write('i');
+    } else if (tag == tagj) {
+      Keyboard.write('j');
+    } else if (tag == tagk) {
+      Keyboard.write('k');
+    } else if (tag == tagl) {
+      Keyboard.write('l');
+    } else if (tag == tagm) {
+      Keyboard.write('m');
+    } else if (tag == tagn) {
+      Keyboard.write('n');
+    } else if (tag == tago) {
+      Keyboard.write('o');
+    } else if (tag == tagp) {
+      Keyboard.write('p');
+    } else if (tag == tagq) {
+      Keyboard.write('q');
+    } else if (tag == tagr) {
+      Keyboard.write('r');
+    } else if (tag == tags) {
+      Keyboard.write('s');
+    } else if (tag == tagt) {
+      Keyboard.write('t');
+    } else if (tag == tagu) {
+      Keyboard.write('u');
+    } else if (tag == tagv) {
+      Keyboard.write('v');
+    } else if (tag == tagw) {
+      Keyboard.write('w');
+    } else if (tag == tagx) {
+      Keyboard.write('x');
+    } else if (tag == tagy) {
+      Keyboard.write('y');
+    } else if (tag == tagz) {
+      Keyboard.write('z');
+    } else if (tag == tag1) {
+      Keyboard.write('1');
+    } else if (tag == tag2) {
+      Keyboard.write('2');
+    } else if (tag == tag3) {
+      Keyboard.write('3');
+    } else if (tag == tag4) {
+      Keyboard.write('4');
+    } else if (tag == tag5) {
+      Keyboard.write('5');
+    } else if (tag == tag6) {
+      Keyboard.write('6');
     }
+    
     delay(100);
   }
 }

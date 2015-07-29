@@ -1,0 +1,8 @@
+mkdir ~/.config/autostart
+touch ~/.config/autostart/rfid.desktop
+cd ~/.config/autostart
+cat rfid.desktop
+[Desktop Entry]
+Name=rfid
+Exec=/home/pi/rfid_startup.sh
+Type=application
