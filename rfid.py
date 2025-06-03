@@ -2,12 +2,14 @@ from tkinter import Tk, Label, LEFT
 from PIL import Image, ImageTk
 import serial
 from threading import Timer
+import os
 
-start_image = 'images/rfid_main.jpg'
+path = os.path.dirname(__file__)
+start_image = os.path.join(path, 'images/rfid_main.jpg')
 ten_minutes = 600000
 
 # Setup image map
-image_list = './image_list.txt'
+image_list = os.path.join(path, 'images/image_list.txt')
 lines = (line.rstrip('\n') for line in open(image_list))
 image_map = {}
 for line in lines:
@@ -41,7 +43,7 @@ def handle_keypress(event):
     # print('char ' + char)
     if char == '':
         return
-    filename = 'images/' + image_map[char]
+    filename = os.path.join(path, 'images/' + image_map[char])
     # print('filename ' + filename)
     update_image(filename)
     timer = Timer(ten_minutes, reset_image)
