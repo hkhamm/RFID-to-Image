@@ -7,7 +7,7 @@ start_image = 'images/rfid_main.jpg'
 ten_minutes = 600000
 
 # Setup image map
-image_list = 'image_list.txt'
+image_list = './image_list.txt'
 lines = (line.rstrip('\n') for line in open(image_list))
 image_map = {}
 for line in lines:
