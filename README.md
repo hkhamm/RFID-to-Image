@@ -6,7 +6,18 @@ To add new images you must place them in the images folder, add entries associat
 
 This project was created by Keith Hamm for the [University of Oregon Museum of Natural and Cultural History](http://natural-history.uoregon.edu). As of this writing it is currently used by guests in the museum's natural history exhibit hall.
 
-## Run on startup
+## Run at startup
 
-1. Open /etc/rc.local
-2. At the end of the file, just before the "exit 0" line add `python /home/<user>/<path-to>/RFID-to-Image/rfid.py &`
+Create the autostart directory:
+
+```
+mkdir /home/<user>/.config/autostart
+```
+
+Copy the `rfid.desktop` file to the new directory.
+
+Reboot and the service should run:
+
+```
+sudo reboot
+```
