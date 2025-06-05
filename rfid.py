@@ -3,10 +3,13 @@ from PIL import Image, ImageTk
 import serial
 from threading import Timer
 import os
+from time import sleep
+
+print('Starting RFID to Image')
 
 path = os.path.dirname(__file__)
 start_image = os.path.join(path, 'images/rfid_main.jpg')
-ten_minutes = 600000
+ten_minutes = 600
 
 # Setup image map
 image_list = os.path.join(path, 'images/image_list.txt')
@@ -15,7 +18,8 @@ image_map = {}
 for line in lines:
     image_map[line[0]] = line[2:]
 
-# Listen for RFID,
+# Listen for RFID
+sleep(10)
 serial.Serial('/dev/ttyACM0', baudrate=9600)
 
 window = Tk()
@@ -40,11 +44,11 @@ def reset_image():
 
 def handle_keypress(event):
     char = event.char
-    # print('char ' + char)
+    print('char ' + char)
     if char == '':
         return
     filename = os.path.join(path, 'images/' + image_map[char])
-    # print('filename ' + filename)
+    print('filename ' + filename)
     update_image(filename)
     timer = Timer(ten_minutes, reset_image)
     timer.start()
