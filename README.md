@@ -6,6 +6,12 @@ To add new images you must place them in the images folder, add entries associat
 
 This project was created by Keith Hamm for the [University of Oregon Museum of Natural and Cultural History](http://natural-history.uoregon.edu). As of this writing it is currently used by guests in the museum's natural history exhibit hall.
 
+## Install dependencies
+
+```
+pip install Pillow
+```
+
 ## Run at startup
 
 Create the autostart directory:
