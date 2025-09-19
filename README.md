@@ -9,7 +9,7 @@ This project was created by Keith Hamm for the [University of Oregon Museum of N
 ## Install dependencies
 
 ```
-pip install Pillow
+pip install Pillow pyserial
 ```
 
 ## Run at startup
